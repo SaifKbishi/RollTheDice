@@ -16,8 +16,46 @@ h1{
   text-align: center;
   filter: invert(1);
 }
-
-
+.container{
+  display: flex;
+  flex-direction: row-reverse;
+}
+.gameBoard{
+  background-color:rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.buttons{
+  display: flex;  
+  flex-direction: column;
+  margin-top: 15px;
+}
+.button.rollDice{
+  background: url('../images/Two_red_dice.png');
+  background-size: cover;
+}
+.winningScoreDiv{
+  margin: 20px 0;
+}
+.winningScore{
+  font-size: 30px;
+  max-width: 70%;
+  text-align: center;
+}
+.gamePlay>*{
+  padding: 10px 0;
+}
+.gamePlay h3{
+  margin: 10px 0;  
+}
+.player{
+  background-color:rgba(47 , 47, 195, 0.5);
+}
+.liveGame{
+  flex-grow: 1;
+}
 .App{
   background: url('../images/gameBackground.jpg');
   background-size: cover;
@@ -30,6 +68,34 @@ h1{
  margin:40px 20px;
  border-radius: 25px;
 }
+
+
+/*Buttons*/
+.button{
+  text-align: center;
+  display: inline-block;
+  margin: 15px;
+  font-weight: bold;
+  padding: 10px 0 10px 10px ;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 .2em gray; 
+  cursor: pointer;
+  font-size: 40px;
+  width: 250px;
+}
+.button:active {
+box-shadow: none;
+position: relative;
+top: .2em;
+}
+/*Buttons end*/
+
 
 .effect7
 {

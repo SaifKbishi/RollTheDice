@@ -1,9 +1,10 @@
 import React from 'react';
 import Dice from './components/Dice';
 import ImagesArr from './components/ImagesArr';
-import './components/diceRoll.css';
-import defaultDice from "./images/Two_red_dice.png";
+import Winner from './components/Winner';
 
+import defaultDice from "./images/Two_red_dice.png";
+import './components/diceRoll.css';
 import "./App.css";
 
 class App extends React.Component{
@@ -16,6 +17,8 @@ class App extends React.Component{
     player1_CurrentScore:0,
     player2_CurrentScore:0,
     winningScoreValue: 19,
+    player1_winner:0,
+    player2_winner:0,
   };
 
   diceRoll = ()=>{
@@ -37,22 +40,44 @@ class App extends React.Component{
   componentDidUpdate(){
     console.log('componentDidUpdate');
     console.log('dice_1_result: ',this.state.dice_1_resultVal, ', dice_2_result: ',this.state.dice_2_resultVal);
-    if(this.state.dice_1_resultVal !== this.state.dice_2_resultVal){
-      console.log('dice are NOT equal reset player score')
+    if(this.state.dice_1_resultVal === 6 && this.state.dice_2_resultVal ===6){//if dice are not equal to 6
+      console.log('dice are  equal reset player score');
+       if(this.state.player1_playing === 1){//if player 1 is playing
+        console.log('player1_playing');
+         this.setState({          
+          player1_playing:0,
+          player1_CurrentScore:0,
+          rollSum: null,
+          dice_1_resultVal:null,
+          dice_2_resultVal: null,
+        });
+      }else if(this.state.player1_playing === 0){//if player 2 is playing
+        console.log('player2_playing');
+         this.setState({          
+          player1_playing:1,
+          player2_CurrentScore:0,
+          rollSum: null,
+          dice_1_resultVal:null,
+          dice_2_resultVal: null,
+        });
+      }
     }else{
-      //check which player is playing and reset his score
-      console.log('dice are equal reset player score');
-    }
+      console.log('dice are NOT equal to 6, keep playing');
+    }//end of if dice are not equal to 6
 
     if(this.state.player1_CurrentScore >= this.state.winningScoreValue){
       console.log('player 1 won');
-      //and restart game
-      //this.newGame();
+      this.setState({
+        player1_winner:1,
+      });
+      this.newGame();
     }
     if(this.state.player2_CurrentScore >= this.state.winningScoreValue){
-      console.log('player 2 won')
-      //and restart game
-      //this.newGame();
+      console.log('player 2 won');
+      this.setState({
+        player2_winner:1,
+      });
+      this.newGame();
     }
   }//componentDidUpdate
 
@@ -102,35 +127,48 @@ class App extends React.Component{
     });
   }//newGame
 
-
-
   render() {
     return (
       <div className="App">
         <h1>Dice Roll</h1>
-        <div className="buttons">         
-          <button className="button" onClick={this.diceRoll}>Roll Dice</button>
-          <button className="button" onClick={this.holdCurrentScore}>Hold</button>             
-          <button className="button" onClick={this.newGame}>New Game</button>             
-        </div>
-        <input 
-          type="text" 
-          value={this.state.winningScoreValue}
-          onChange={e=> this.setState({winningScoreValue: e.target.value})}
-        />
-        <div>Player {this.state.player1_playing ? '1' : '2'} is playing</div>
-        <div>Dice1: {this.state.dice_1_resultVal}</div>
-        <div>Dice2: {this.state.dice_2_resultVal}</div>
-        <div>Sum of the dice: {this.state.rollSum}</div>
-        <div>player1_CurrentScore: {this.state.player1_CurrentScore}</div>
-        <div>player2_CurrentScore: {this.state.player2_CurrentScore}</div>
-        <div className="diceDiv">
-        {this.state.gameNotStarted ? 
-          <img className="dice-image" src={defaultDice} alt="reddice" /> :
-          <div className="diceImages">
-            <Dice image={this.state.dice1_Img}/>
-            <Dice image={this.state.dice2_Img}/>             
-          </div>}
+        <div className="container">
+          <div className="gameBoard">
+            <div className="buttons">         
+              <button className="button rollDice" onClick={this.diceRoll}>Roll Dice</button>
+              <button className="button" onClick={this.holdCurrentScore}>Hold</button>             
+              <button className="button" onClick={this.newGame}>New Game</button>              
+            </div>
+            <div className="winningScoreDiv">
+              <input 
+                className="winningScore"
+                type="text" 
+                value={this.state.winningScoreValue}
+                onChange={e=> this.setState({winningScoreValue: e.target.value})}
+              />
+            </div>
+            <div className="gamePlay">
+              <div>Player 1 Score: {this.state.player1_CurrentScore}</div>
+              <div className="player">Player <strong><h3>{this.state.player1_playing ? '1' : '2'}</h3></strong> is playing</div>
+              <div>Player 2 Score: {this.state.player2_CurrentScore}</div>
+            </div>
+          </div>
+          {/*<div>Dice1: {this.state.dice_1_resultVal}</div>
+          <div>Dice2: {this.state.dice_2_resultVal}</div>*/}
+          <div className="liveGame">
+            <div>Sum of the dice: {this.state.rollSum}</div>
+            <div className="diceDiv">
+            {this.state.gameNotStarted ? 
+              <img className="dice-image" src={defaultDice} alt="reddice" /> :
+              <div className="diceImages">
+                <Dice image={this.state.dice1_Img}/>
+                <Dice image={this.state.dice2_Img}/>             
+              </div>}         
+            </div>
+          </div>
+          <div className="winnerDiv">
+            <Winner winningPlayer="1"/>
+            <Winner winningPlayer="2"/>
+          </div>
         </div>
       </div>
     );

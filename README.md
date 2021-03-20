@@ -15,3 +15,4 @@
 //Textfeild component that will set the max score to win  
 //Current score with controled value of the current score  
 //Total score that will hold the total score for each player  
+

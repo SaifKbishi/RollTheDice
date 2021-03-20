@@ -3,7 +3,7 @@ import './diceRoll.css';
 
 const Dices = ({image}) => {
  return(
-  <img className="box effect7 effect8" src={image} />
+  <img className="box effect7 effect8" src={image} alt="dice"/>
  )
 }
 

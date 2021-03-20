@@ -1,9 +1,34 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 30px;
+  color:#fff;
+  font-family: 'Playfair Display', serif;
+}
+h1{
+  margin: 0;
+  background: inherit;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;  
+  font: 900 15vmin/15vh cookie, cursive;
+  text-align: center;
+  filter: invert(1);
+}
 
+
+.App{
+  background: url('../images/gameBackground.jpg');
+  background-size: cover;
+  height: 100vh;
+}
 
 .box {
  height:250px;
  background:#FFF;
  margin:40px 20px;
+ border-radius: 25px;
 }
 
 .effect7

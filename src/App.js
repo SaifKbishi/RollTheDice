@@ -146,7 +146,7 @@ class App extends React.Component{
             </div>
           </div>
           <div className="liveGame">
-            <div>weHaveaWinner ? <Winner winnerPlayer/> : Sum of the dice: {this.state.rollSum}</div>
+            <div>Sum of the dice: {this.state.rollSum}</div>
             <div className="diceDiv">
             {this.state.gameNotStarted ? 
               <img className="dice-image" src={defaultDice} alt="reddice" /> :
@@ -156,10 +156,10 @@ class App extends React.Component{
               </div>}         
             </div>
           </div>
-          <div className="winnerDiv">
+          {/*<div className="winnerDiv">
             <Winner winningPlayer="1"/>
             <Winner winningPlayer="2"/>
-          </div>
+            </div>*/}
         </div>
       </div>
     );

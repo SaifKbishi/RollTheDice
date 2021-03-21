@@ -56,6 +56,13 @@ h1{
 .liveGame{
   flex-grow: 1;
 }
+.liveGame>div{
+  padding-top: 40px;
+  color: #FFF;
+}
+.dice-image{
+  width: 70%;
+}
 .App{
   background: url('../images/gameBackground.jpg');
   background-size: cover;
@@ -95,6 +102,33 @@ position: relative;
 top: .2em;
 }
 /*Buttons end*/
+
+
+@media (max-width: 400px) {
+  body{
+    font-size: 20px;
+  }
+   .container{
+    flex-direction: column;
+  }
+  .buttons{
+    flex-direction: row;
+  }
+  .button{
+    font-size: 15px;
+    width: 95px;
+  }
+  .winningScore{
+    font-size: 20px;
+  }
+  .dice-image{
+    width: 70%;
+  }
+  .box{
+    height: 120px;
+  }
+ }
+
 
 
 .effect7
